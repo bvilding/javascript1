@@ -44,6 +44,8 @@ div.appendChild(myImg);
 console.log(myImg);
 
 
+
+
 // h1.addEventListener('mouseleave'), e => {
 //   e.target.style.color = '#00ffff';
 // }
