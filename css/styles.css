@@ -1,0 +1,15 @@
+.task-card {
+  width:100%;
+  padding: 15px 0px;
+  background-color: #c3c3c3;
+  margin: 20px 0px;
+}
+
+#todo {
+  width: 100%;
+  text-align: center;
+}
+
+.todo-content{
+  width:80%;
+}
