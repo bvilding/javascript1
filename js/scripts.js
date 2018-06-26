@@ -167,3 +167,154 @@ function getSoap() {
 }
 
 getSoap();
+
+let recipe = {
+  flour: '20 oz', //flour is the key, '20oz.' is the value.
+  eggs: 3,
+  vanilla: true,
+  rum: 'hella'
+}; //Object Literal.
+
+console.log(recipe);
+
+//RIGHT way to make a copy of an object
+let clone = Object.create(recipe); //To safely/correctly make a copy of an object you should use Object.create()
+console.log(Object.getPrototypeOf(clone), '< This is the prototype'); //Should show the original object you copied as the prototype
+
+//WRONG way to make a copy of an object
+
+let cheese = {
+  isGood: true,
+  sharpness: 1000
+}; //Original
+
+let cheeseCopy = cheese; //This will make a reference to the original, not what we want.
+
+cheeseCopy.isGood = false; //This will change BOTH the original and the new instance
+
+// console.log(cheese, 'ORIGINAL', cheeseCopy, 'COPY'); //Will show that both the old and new have been changed.
+
+let stringExample = new String("hello there");
+let numberExample = new Number(94);
+let boolExample = new Boolean(true);
+let arrayExample = new Array(["cheese", 222, [2]]);
+let objectExample = new Object({cheeseIsGood: true});
+
+// console.log(stringExample, numberExample, boolExample, arrayExample, objectExample); //Should be able to inspect the __proto__ chain and see the inherited parent objects
+
+function Spaceship(rockets, fluxCapacitor, pilot, blasters, shield, landingGear) { //Always capitalize your constructor function names
+  this.rockets = rockets;
+  this.fluxCapacitor = fluxCapacitor;
+  this.pilot = pilot;
+  this.blasters = blasters;
+  this.shield = shield;
+  this.landingGear = landingGear;
+}; //Constructor function (also the 4th way to bind THIS).
+
+let firefly = new Spaceship(4, false, 'Mal Reynolds', Infinity); //This will return a new object with the properties that you passed in.
+
+
+let users = []; //Collection of users we want to keep track of.
+
+let submitBtn = document.querySelector('.btn');
+
+function User(name, pw) { //Our contructor function for making new users
+  this.name = name;
+  this.pw = pw;
+};
+
+submitBtn.addEventListener('click', e => {
+  e.preventDefault();
+  let userName = document.forms.newUserForm.username.value;
+  let password = document.forms.newUserForm.password.value;
+  let newUser = new User(userName, password); //Use the data collected in our HTML form to create our new user
+  users.push(newUser); //add our new user to our collection of users.
+  document.forms.newUserForm.reset(); //reset the form inputs
+  console.log(users); //Should show all our users each time we make a new one.
+});
+
+// Brandy's Notes
+
+// OBJECTS
+// An object is a collection of properties, and a property is an association between a name (or key) and a value.
+// a property: {key (name): value}
+
+// A new Object can be created by two ways
+let object1 = {}; // "object literal" syntax
+let object2 = new Object(); // "object constructor" syntax
+
+//object example
+// ssecond property has name "age" and value "22"
+let person = {
+  name: 'Brandy',
+  age: 22,
+  hairColor: 'brown',
+  other: ['glasses', 'short'],
+  favorites : {
+    food: 'pizza',
+    dessert: 'cookies'
+  },
+  greet: function() {
+      return `Hi`;
+  }
+};
+
+console.log(person);
+
+// When defining an object we use let or var, If you us const you are nu able to change the object in any way
+
+// Accessing object properies
+// (name of object).(key)
+
+console.log(person.name); // dot notation
+// or
+onsole.log(person['name']); // square bracket notation
+
+// console logging a variable that is not defined
+console.log(person.eyeColor); // undefined NOT NULL
+
+//Adding properies
+// for object 1
+person.eyeColor = 'brown' //dot notation
+object1.food = "pizza";
+
+object1['color'] = 'pink';
+console.log(object1.color);
+
+// FOR...IN loop
+// best way to iterate over objects
+// syntax
+// for(let key in object) {}
+
+for (let per in person) {
+  console.log('key', per, 'value', person[per]);
+};
+
+// for ... of loop
+// Not the best for loop to iterate objects, you need special Object methods such as
+// Object.keys, Object.values, Object.entries
+
+for(let [key,val] of Object.entries(person)){ // Object.entries converts each property into an array
+  console.log(key,val);
+};
+
+for(let key of Object.keys(obj)){ //Object.keys graps the keys of the object
+  console.log(key);
+};
+
+for(let key of Object.values(obj)){ //Object.values graps the values of the object
+  console.log(key);
+};
+
+// object.create ex best practice for cloning
+// The Object.create() method creates a new object, using an existing object to provide the newly created object
+let newObj = Object.create(object1);
+newObj.flower = 'rose';
+newObj.color = 'yellow';
+console.log('newobj', newObj);
+console.log('object1',object1);
+
+// the newObj value change is done to the newObj. object1 has all its orginal keys and values
+// the newObj does holds all values of object one even if we change a value of a key due to inhertiance
+// We use Object.create() so that the new Object is not stores at the same place the old object is
+// {this would cause the changing of both objects instead os just the new objects}
